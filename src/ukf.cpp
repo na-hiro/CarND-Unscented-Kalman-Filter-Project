@@ -89,12 +89,14 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 			double px = rho * cos(phi);
       double py = rho * sin(phi);
 			double rho_dot = meas_package.raw_measurements_[2];
+
 			x_ << px, py, rho_dot, 0.0, 0.0;
 		}
 		else if (meas_package.sensor_type_ == MeasurementPackage::LASER)
 		{
-			double px(meas_package.raw_measurements_[0]);
-			double py(meas_package.raw_measurements_[1]);
+			double px = meas_package.raw_measurements_[0];
+			double py = meas_package.raw_measurements_[1];
+
 			x_ << px, py, 0.0, 0.0, 0.0;
 		}
 		time_us_ = meas_package.timestamp_;
